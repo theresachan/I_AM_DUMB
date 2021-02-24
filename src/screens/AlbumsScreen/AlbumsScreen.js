@@ -3,39 +3,36 @@ import {  View,StyleSheet,Image, Dimensions } from 'react-native'
 import { Card, Text, Button, Icon } from "react-native-elements";
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { colors } from '../../../config';
-import { useNavigation } from "@react-navigation/native";
-import Feed from "../../../components/Feed";
-import { HomePage } from "../HomePage";
-export const 
-AlbumsScreen = ({route, navigation}) => {
-    const nav=useNavigation()
 
-    useEffect(() => {
-     nav.setOptions({
-        headerTransparent:true,
-        headerTitle:null,
-         headerLeft: () => (
-        <TouchableOpacity onPress={()=>navigation.goBack()}>     
-        <Image
-          style={{ width: 12, height: 22 ,marginLeft:15}}
-          source={require("../../../assets/images/back.png")}
-        />
-        </TouchableOpacity>
-      )})
+export default class
+AlbumsScreen extends React.Component {
+    static navigationOptions = {
+        title: 'Albums',
+    };
+
+    constructor(){
+        super();
+
+        this.state ={
+            cardName:'Some Album'
+        }
+
+        this.cardNumber = 0;
+    }
+
+    changeCardName(){
+        this.setState({
+            cardName: `I am new CardName ${this.cardNumber}`
+        });
+
+        this.cardNumber++
+    }
 
       
-    })
-
-    const [cardName, setcardName] = useState('Some Album')
-    const [submitted, setsubmitted] = useState(false)
-    // const cardNameChanged=()=>{
-    //      setcardName =('hey')
-    // }
-    const [cardNameChanged,setcardNameChanged]= useState('hey')
-
     
     
-
+    render(){
+        const {cardName} = this.state;
     return (
 
         
@@ -49,7 +46,7 @@ AlbumsScreen = ({route, navigation}) => {
         <ScrollView style={styles.feedContainer}>
             {/* <Feed></Feed> */}
             <Card>
-        <Card.Title>{cardName}/{cardNameChanged}</Card.Title>
+        <Card.Title>{cardName}</Card.Title>
         <Card.Divider/>
         {/* <Card.Image source={require('../images/pic2.jpg')}> */}
             <Text style={{marginBottom: 10}}>
@@ -60,14 +57,15 @@ AlbumsScreen = ({route, navigation}) => {
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
             title='VIEW NOW' />
         {/* </Card.Image> */}
-        </Card>
-
         <Button
             icon={<Icon name='code' color='#ffffff' />}
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
             title='Change Card Name'
             
-            onPress={() => { cardNameChanged}} />
+            onPress={() => { this.changeCardName()}} />
+        </Card>
+
+        
 
         </ScrollView>
    <View style={styles.footer}>
@@ -88,9 +86,8 @@ AlbumsScreen = ({route, navigation}) => {
            
      
     )
+    }
 }
-
-export default AlbumsScreen
 
 export const styles=StyleSheet.create({
     container:{

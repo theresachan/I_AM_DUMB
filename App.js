@@ -15,7 +15,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { HomePage } from "./src/screens/HomePage";
 import { Links } from "./src/screens/Links";
 import { Options } from "./src/screens/Options";
-import { AlbumsScreen } from "./src/screens/AlbumsScreen";
+import  AlbumsScreen from "./src/screens/AlbumsScreen/AlbumsScreen";
 
 
 
